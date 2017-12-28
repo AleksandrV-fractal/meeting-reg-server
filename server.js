@@ -11,8 +11,6 @@ const db = configureMongoose();
 // Create a new Express application instance
 const app = configureExpress(db);
 
-// Configure the Passport middleware
-
 // Use the Express application instance to listen to the '3000' port
 app.listen(3000);
 
