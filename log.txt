@@ -1,0 +1,58 @@
+
+> MEAN@0.0.9 start /Users/aleksandr-macbook/MyDevSpace/Learning mean stack/working app/merge
+> concurrently "npm run tsc:w" "npm run app" 
+
+[0] 
+[0] > MEAN@0.0.9 tsc:w /Users/aleksandr-macbook/MyDevSpace/Learning mean stack/working app/merge
+[0] > tsc -w
+[0] 
+[1] 
+[1] > MEAN@0.0.9 app /Users/aleksandr-macbook/MyDevSpace/Learning mean stack/working app/merge
+[1] > node server
+[1] 
+[1] Server running at http://localhost:3000/
+[0] 13:08:39 - Compilation complete. Watching for file changes.
+[1] token belonging to Aleksandr is being used to load a list of users
+[1] (node:52590) DeprecationWarning: Mongoose: mpromise (mongoose's default promise library) is deprecated, plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
+[1] Error trying to save user SandySandy3 
+[1]  returned with error : Username already exists
+[1] Error trying to save user JohnDoeJohnDoe1 
+[1]  returned with error : Username already exists
+[1] [0mPOST /api/auth/loadUsers [32m200 [0m104.745 ms - 155[0m
+[1] token belonging to Aleksandr is being used to load a list of users
+[1] Error trying to save user SandySandy3 
+[1]  returned with error : Username already exists
+[1] Error trying to save user JohnDoeJohnDoe1 
+[1]  returned with error : Username already exists
+[1] [0mPOST /api/auth/loadUsers [32m200 [0m64.167 ms - 155[0m
+[1] token belonging to Aleksandr is being used to load a list of users
+[1] Error trying to save user JohnDoeJohnDoe1 
+[1]  returned with error : Username already exists
+[1] Error trying to save user SandySandy3 
+[1]  returned with error : Username already exists
+[1] [0mPOST /api/auth/loadUsers [32m200 [0m55.510 ms - 155[0m
+[1] token belonging to Aleksandr is being used to load a list of users
+[1] Error trying to save user SandySandy3 
+[1]  returned with error : Username already exists
+[1] Error trying to save user JohnDoeJohnDoe1 
+[1]  returned with error : Username already exists
+[1] [0mPOST /api/auth/loadUsers [32m200 [0m86.911 ms - 155[0m
+[1] token belonging to Aleksandr is being used to load a list of users
+[1] Error trying to save user SandySandy3 
+[1]  returned with error : Username already exists
+[1] Error trying to save user JohnDoeJohnDoe1 
+[1]  returned with error : Username already exists
+[1] [0mPOST /api/auth/loadUsers [32m200 [0m64.823 ms - 155[0m
+[1] token belonging to Aleksandr is being used to load a list of users
+[1] Error trying to save user JohnDoeJohnDoe1 
+[1]  returned with error : Username already exists
+[1] Error trying to save user SandySandy3 
+[1]  returned with error : Username already exists
+[1] [0mPOST /api/auth/loadUsers [32m200 [0m58.859 ms - 155[0m
+[1] token belonging to Aleksandr is being used to load a list of users
+[1] Error trying to save user SandySandy3 
+[1]  returned with error : Username already exists
+[1] Successfully saved  JohnoeJohnDoe1
+[1] [0mPOST /api/auth/loadUsers [32m200 [0m65.629 ms - 121[0m
+[1] npm run app exited with code null
+[0] npm run tsc:w exited with code null
