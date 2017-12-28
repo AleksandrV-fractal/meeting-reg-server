@@ -37,7 +37,7 @@ exports.setSecret = function (req, res) {
 	*/
 	let newSecret = req.body.meetingSecret
 	if (newSecret != '') {
-		Meeting = mongoose.model('RoomDetails')
+		Meeting = mongoose.model('RoomDetails');
 		// request exists, now to upsert I think would be best
 		// upsert meeting into table 
 		Meeting.update(
@@ -75,7 +75,7 @@ exports.setSecret = function (req, res) {
 		request.status(400).send({
 			'result': 'faliure',
 			message: 'secret must be inclued in this request'
-		})
+		});
 	}
 }
 
@@ -91,34 +91,30 @@ exports.getSecret = function (req, res, next) {
 	console.log('getting Secret')
 	if (req.params.meetingId != '') {
 		if (cachedRooms[req.params.meetingId]) {
-			console.log('meetingData exists')
 			//move on
-			next()
+			next();
 		} else {
 			// load from db
-			Meeting = mongoose.model('RoomDetails')
+			Meeting = mongoose.model('RoomDetails');
 			Meeting.findOne({ meetingId: req.params.meetingId }).exec().then((meetData, err) => {
-				console.log("promise returned")
 				if (err) {
-					console.log(err)
 					res.status(400).send({
 						result: 'failiure',
 						message: getErrorMessage(err)
-					})
+					});
 				} else {
 					if (meetData != '') {
-						console.log(meetData)
-						cachedRooms[meetData.meetingId] = meetData.meetingSecret
+						cachedRooms[meetData.meetingId] = meetData.meetingSecret;
 						// now that its set, move on
-						next()
+						next();
 					} else {
 						res.status(400).send({
 							result: 'failiure',
 							message: 'meeting does not yet have a secret'
-						})
+						});
 					}
 				}
-			})
+			});
 
 		}
 	} else {
@@ -139,7 +135,6 @@ exports.checkRegistration = function (req, res) {
 	saId
 	meetingId
 	*/
-	console.log('checking registration')
 
 	if (req.body.cellNo != '') {
 		/*
@@ -148,7 +143,6 @@ exports.checkRegistration = function (req, res) {
 		*/
 
 		Participant = mongoose.model('RoomParticipant')
-		console.log('findingPart')
 		Participant.findOne({
 			$and: [{ meetingId: req.params.meetingId }, { saId: req.body.saId }]
 		}).exec().then((partData, err) => {
@@ -158,27 +152,27 @@ exports.checkRegistration = function (req, res) {
 					res.status(200).send({
 						result: 'success',
 						message: 'The SA Id number ' + req.body.saId + ' is  registered to the meeting id ' + req.params.meetingId
-					})
+					});
 				} else {
 					res.status(400).send({
 						result: 'failiure',
 						message: 'The SA Id number ' + req.body.saId + ' is not registered to the meeting id ' + req.params.meetingId
-					})
+					});
 				}
 			} else {
 				res.status(400).send({
 					result: 'faliure',
 					message: 'meetingId must be included in the request'
-				})
+				});
 			}
-		})
+		});
 
 
 	} else {
 		res.status(400).send({
 			result: 'faliure',
 			message: 'SA Id of participant to check must be included'
-		})
+		});
 	}
 
 }
@@ -199,16 +193,16 @@ exports.registerParticipant = function (req, res) {
 
 	if ((req.body.cellNo) && (req.body.saId) && (req.body.secret)) {
 		// all fields exist 
-		let meetSecret = cachedRooms[req.params.meetingId]
+		let meetSecret = cachedRooms[req.params.meetingId];
 		if (meetSecret == req.body.secret) {
 			// secrets match
 
-			MeetingParticipant = mongoose.model('RoomParticipant')
-			meetingParticipant = new MeetingParticipant()
+			MeetingParticipant = mongoose.model('RoomParticipant');
+			meetingParticipant = new MeetingParticipant();
 			// going to set values explicitly  
-			meetingParticipant.saId = req.body.saId
-			meetingParticipant.cellNo = req.body.cellNo
-			meetingParticipant.meetingId = req.params.meetingId
+			meetingParticipant.saId = req.body.saId;
+			meetingParticipant.cellNo = req.body.cellNo;
+			meetingParticipant.meetingId = req.params.meetingId;
 
 			// now to save the model to db
 
@@ -217,14 +211,14 @@ exports.registerParticipant = function (req, res) {
 					res.status(200).send({
 						result: 'success',
 						message: 'participant: ' + meetingParticipant.saId + ';' + meetingParticipant.cellNo + ';' + meetingParticipant.meetingId
-					})
+					});
 				} else {
 					res.status(400).send({
 						result: 'error',
 						message: getErrorMessage(err)
-					})
+					});
 				}
-			})
+			});
 
 
 		} else {
@@ -232,14 +226,14 @@ exports.registerParticipant = function (req, res) {
 			res.status(400).send({
 				result: 'faliure',
 				message: 'the supplied secret does not match that of the provided meeting Id'
-			})
+			});
 		}
 	} else {
 		// there are fields missing
 		res.status(400).send({
 			result: 'faliure',
 			message: 'cellNo , saId , secret must all be included in the request to be registered'
-		})
+		});
 	}
 
 }
@@ -256,17 +250,17 @@ exports.getRegisteredParticipants = function (req, res) {
 	let meetId = req.params.meetingId;
 	let Meeting = mongoose.model('RoomParticipant');
 
-	Meeting.find({ meetingId: meetId },'-_id -__v').exec().then((returnedData, err) => {
+	Meeting.find({ meetingId: meetId }, '-_id -__v').exec().then((returnedData, err) => {
 		if (!err) {
 			res.status(200).send({
 				result: 'success',
 				data: returnedData
-			})
+			});
 		} else {
 			res.send(400).send({
 				result: 'faliure',
 				message: getErrorMessage(err)
-			})
+			});
 		}
 	});
 
